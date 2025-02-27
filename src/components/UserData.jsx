@@ -11,30 +11,9 @@ import {
 } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
-const UserData = () => {
-  const [formData, setFormData] = useState(() => {
-    try {
-      const saved = localStorage.getItem("userData");
-      return saved 
-        ? JSON.parse(saved)
-        : {
-            id: uuidv4(),
-            name: "",
-            email: "",
-            phone: "",
-            address: "",
-          };
-    } catch (error) {
-      return {
-        id: uuidv4(),
-        name: "",
-        email: "",
-        phone: "",
-        address: "",
-      };
-    }
-  });
-
+const UserData = ({formData, setFormData}) => {
+    
+  let valueUpdated= false;
   const [isDirty, setIsDirty] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
 
@@ -58,14 +37,18 @@ const UserData = () => {
 
   useEffect(() => {
     // Ensure ID is generated if not present
-    if (!formData.id) {
+    if (valueUpdated) {
+        valueUpdated= false;
       setFormData(prev => ({ ...prev, id: uuidv4() }));
     }
-  }, []);
+  }, [valueUpdated]);
 
   const handleChange = (e) => {
     if (!isDirty) setIsDirty(true);
+    if(e){
+        valueUpdated= true;
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -81,16 +64,6 @@ const UserData = () => {
 
   return (
     <Box sx={{ p: 3, maxWidth: 600, margin: '0 auto' }}>
-      {/* <Grid item xs={6}>
-        <Paper sx={{ p: 1 }}>
-          <UserForm />
-        </Paper>
-      </Grid>
-      <Grid item xs={6}>
-        <Paper sx={{ p: 1 }}>
-          <UserForm />
-        </Paper>
-      </Grid> */}
       <animated.form style={formAnimation} onSubmit={handleSubmit}>
         <Box display="flex" flexDirection="column" gap={3}>
           <TextField
