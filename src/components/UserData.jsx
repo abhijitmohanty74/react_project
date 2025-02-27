@@ -11,18 +11,15 @@ import {
 } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
-const UserData = ({formData, setFormData}) => {
-    
-  let valueUpdated= false;
+const UserData = ({ formData, setFormData }) => {
+  let valueUpdated = false;
   const [isDirty, setIsDirty] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
 
-
   const formAnimation = useSpring({
     from: { x: 0 },
-    to: { x: 0},
-  })
-
+    to: { x: 0 },
+  });
 
   useEffect(() => {
     const handleBeforeUnload = (e) => {
@@ -36,18 +33,17 @@ const UserData = ({formData, setFormData}) => {
   }, [isDirty]);
 
   useEffect(() => {
-    // Ensure ID is generated if not present
     if (valueUpdated) {
-        valueUpdated= false;
-      setFormData(prev => ({ ...prev, id: uuidv4() }));
+      valueUpdated = false;
+      setFormData((prev) => ({ ...prev, id: uuidv4() }));
     }
   }, [valueUpdated]);
 
   const handleChange = (e) => {
     if (!isDirty) setIsDirty(true);
-    if(e){
-        valueUpdated= true;
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    if (e) {
+      valueUpdated = true;
+      setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     }
   };
 
@@ -63,7 +59,7 @@ const UserData = ({formData, setFormData}) => {
   };
 
   return (
-    <Box sx={{ p: 3, maxWidth: 600, margin: '0 auto' }}>
+    <Box sx={{ p: 3, maxWidth: 600, margin: "0 auto" }}>
       <animated.form style={formAnimation} onSubmit={handleSubmit}>
         <Box display="flex" flexDirection="column" gap={3}>
           <TextField
@@ -105,12 +101,12 @@ const UserData = ({formData, setFormData}) => {
             placeholder="Enter your complete address"
           />
 
-          <Button 
-            type="submit" 
-            variant="contained" 
+          <Button
+            type="submit"
+            variant="contained"
             color="primary"
             size="large"
-            sx={{ mt: 2, alignSelf: 'flex-start' }}
+            sx={{ mt: 2, alignSelf: "flex-start" }}
           >
             Save Profile
           </Button>

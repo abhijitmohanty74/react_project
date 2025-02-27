@@ -1,6 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useSpring, animated } from "@react-spring/web";
-import { Box, ToggleButton, ToggleButtonGroup, Paper, Typography } from "@mui/material";
+import {
+  Box,
+  ToggleButton,
+  ToggleButtonGroup,
+  Paper,
+  Typography,
+} from "@mui/material";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
@@ -21,7 +27,9 @@ const RichTextEditor = () => {
     const savedContent = localStorage.getItem("editorContent");
     if (savedContent) {
       setContent(savedContent);
-      setIsPlaceholderVisible(savedContent === "<p style='color: #aaa;'>Start typing...</p>");
+      setIsPlaceholderVisible(
+        savedContent === "<p style='color: #aaa;'>Start typing...</p>"
+      );
     }
   }, []);
 
@@ -38,7 +46,9 @@ const RichTextEditor = () => {
     if (editorRef.current) {
       const text = editorRef.current.innerHTML;
       setContent(text);
-      setIsPlaceholderVisible(text === "<p style='color: #aaa;'>Start typing...</p>");
+      setIsPlaceholderVisible(
+        text === "<p style='color: #aaa;'>Start typing...</p>"
+      );
     }
   };
 
@@ -50,11 +60,13 @@ const RichTextEditor = () => {
   };
 
   const handleKeyDown = (e) => {
-    if (isPlaceholderVisible && (e.key.length === 1 || e.key === "Backspace" || e.key === "Delete")) {
+    if (
+      isPlaceholderVisible &&
+      (e.key.length === 1 || e.key === "Backspace" || e.key === "Delete")
+    ) {
       setContent("");
       setIsPlaceholderVisible(false);
     }
-    
   };
 
   useEffect(() => {
@@ -69,26 +81,58 @@ const RichTextEditor = () => {
   }, [content, isPlaceholderVisible]);
 
   return (
-    <Box position="relative" height={350} border={1} borderRadius={2} overflow="hidden" p={2}>
-      <Box sx={{ mb: 2 }} display="flex" justifyContent="space-between" alignItems="center">
+    <Box
+      position="relative"
+      height={350}
+      border={1}
+      borderRadius={2}
+      overflow="hidden"
+      p={2}
+    >
+      <Box
+        sx={{ mb: 2 }}
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Typography variant="h5" gutterBottom>
           Text Editor
         </Typography>
 
         <ToggleButtonGroup size="small" aria-label="text formatting options">
-          <ToggleButton value="bold" onClick={() => handleFormat("bold")} aria-label="Bold">
+          <ToggleButton
+            value="bold"
+            onClick={() => handleFormat("bold")}
+            aria-label="Bold"
+          >
             <FormatBoldIcon />
           </ToggleButton>
-          <ToggleButton value="italic" onClick={() => handleFormat("italic")} aria-label="Italic">
+          <ToggleButton
+            value="italic"
+            onClick={() => handleFormat("italic")}
+            aria-label="Italic"
+          >
             <FormatItalicIcon />
           </ToggleButton>
-          <ToggleButton value="underline" onClick={() => handleFormat("underline")} aria-label="Underline">
+          <ToggleButton
+            value="underline"
+            onClick={() => handleFormat("underline")}
+            aria-label="Underline"
+          >
             <FormatUnderlinedIcon />
           </ToggleButton>
-          <ToggleButton value="bullet" onClick={() => handleFormat("insertUnorderedList")} aria-label="Bulleted List">
+          <ToggleButton
+            value="bullet"
+            onClick={() => handleFormat("insertUnorderedList")}
+            aria-label="Bulleted List"
+          >
             <FormatListBulletedIcon />
           </ToggleButton>
-          <ToggleButton value="number" onClick={() => handleFormat("insertOrderedList")} aria-label="Numbered List">
+          <ToggleButton
+            value="number"
+            onClick={() => handleFormat("insertOrderedList")}
+            aria-label="Numbered List"
+          >
             <FormatListNumberedIcon />
           </ToggleButton>
         </ToggleButtonGroup>
@@ -118,13 +162,19 @@ const RichTextEditor = () => {
           }}
           contentEditable
           ref={editorRef}
-          dangerouslySetInnerHTML={{ __html: isPlaceholderVisible ? "<p style='color: #aaa;'>Start typing...</p>" : content }}
+          dangerouslySetInnerHTML={{
+            __html: isPlaceholderVisible
+              ? "<p style='color: #aaa;'>Start typing...</p>"
+              : content,
+          }}
           onInput={updateContent}
           onFocus={handleFocus}
           onBlur={() => {
-            if (!content  || content === "<br>") {
+            if (!content || content === "<br>") {
               setIsPlaceholderVisible(true);
-              editorRef.current.innerHTML ={isPlaceholderVisible} ? "<p style='color: #aaa;'>Start typing...</p>" : content;
+              editorRef.current.innerHTML = { isPlaceholderVisible }
+                ? "<p style='color: #aaa;'>Start typing...</p>"
+                : content;
             }
           }}
           onKeyDown={handleKeyDown}

@@ -1,14 +1,21 @@
-import { useState } from "react"
-import { Container, Paper, TextField, Button, Typography, Box } from "@mui/material"
+import { useState } from "react";
+import {
+  Container,
+  Paper,
+  TextField,
+  Button,
+  Typography,
+  Box,
+} from "@mui/material";
 
 export default function Register() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log("Registration successful:", { email, password })
-  }
+    e.preventDefault();
+    console.log("Registration successful:", { email, password });
+  };
 
   return (
     <Container maxWidth="sm" sx={{ mt: 8 }}>
@@ -39,5 +46,5 @@ export default function Register() {
         </form>
       </Paper>
     </Container>
-  )
+  );
 }

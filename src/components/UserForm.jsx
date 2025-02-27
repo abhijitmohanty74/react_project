@@ -11,8 +11,7 @@ import {
 } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
-const UserForm = ({formData, setFormData}) => {
-  
+const UserForm = ({ formData, setFormData }) => {
   const [isDirty, setIsDirty] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
 
@@ -35,7 +34,6 @@ const UserForm = ({formData, setFormData}) => {
   }, [isDirty]);
 
   useEffect(() => {
-    // Ensure ID is generated if not present
     if (valueUpdated) {
       valueUpdated = false;
       setFormData((prev) => ({ ...prev, id: uuidv4() }));
@@ -44,11 +42,10 @@ const UserForm = ({formData, setFormData}) => {
 
   const handleChange = (e) => {
     if (!isDirty) setIsDirty(true);
-    if(e)
-      {
-        valueUpdated = true;
-         setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-      }
+    if (e) {
+      valueUpdated = true;
+      setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    }
   };
 
   const handleSubmit = (e) => {

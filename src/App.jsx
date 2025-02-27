@@ -1,15 +1,15 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
-import { ThemeProvider, CssBaseline } from "@mui/material"
-import { theme } from "./theme"
-import { AuthProvider, useAuth } from "./contexts/AuthContext"
-import Dashboard from "./pages/Dashboard"
-import Login from "./pages/Login"
-import Register from "./pages/Register"
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ThemeProvider, CssBaseline } from "@mui/material";
+import { theme } from "./theme";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import Dashboard from "./pages/Dashboard";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const PrivateRoute = ({ children }) => {
-  const { isAuthenticated } = useAuth()
-  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />
-}
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? <>{children}</> : <Navigate to="/login" replace />;
+};
 
 const App = () => {
   return (
@@ -32,7 +32,7 @@ const App = () => {
         </BrowserRouter>
       </AuthProvider>
     </ThemeProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

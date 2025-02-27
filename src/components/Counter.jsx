@@ -6,10 +6,9 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 const Counter = () => {
-  const [count, setCount] = useState(
-    () => {
+  const [count, setCount] = useState(() => {
     const saved = localStorage.getItem("count");
-    return saved && !isNaN(saved)? Number.parseInt(saved, 10) : 0;
+    return saved && !isNaN(saved) ? Number.parseInt(saved, 10) : 0;
   });
 
   const { height, backgroundColor } = useSpring({
@@ -30,7 +29,6 @@ const Counter = () => {
       borderRadius={2}
       overflow="hidden"
     >
-      
       <animated.div
         style={{
           position: "absolute",
@@ -58,7 +56,7 @@ const Counter = () => {
             variant="contained"
             size="small"
             disabled={count === 0}
-            onClick={() => setCount((c) =>c > 0 && c - 1)}
+            onClick={() => setCount((c) => c > 0 && c - 1)}
           >
             <RemoveIcon />
           </Button>
