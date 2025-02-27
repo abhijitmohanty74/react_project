@@ -6,11 +6,11 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 const Counter = () => {
-  const [count, setCount] = useState(0);
-//     () => {
-//     const saved = localStorage.getItem("count");
-//     return saved && !isNaN(saved)? Number.parseInt(saved, 10) : 0;
-//   });
+  const [count, setCount] = useState(
+    () => {
+    const saved = localStorage.getItem("count");
+    return saved && !isNaN(saved)? Number.parseInt(saved, 10) : 0;
+  });
 
   const { height, backgroundColor } = useSpring({
     height: `${Math.min(100, Math.max(0, count * 10))}%`,
